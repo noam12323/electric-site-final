@@ -107,7 +107,7 @@ const App = () => {
                 <AlertTriangle className="text-yellow-600 mt-1 shrink-0" size={20} />
                 <p className="text-blue-900 leading-relaxed font-medium text-sm">{aiResponse}</p>
               </div>
-              <a href={`tel:${phoneNumber}`} className="mt-5 w-full flex items-center justify-center gap-2 bg-yellow-400 text-blue-900 font-black py-3 rounded-xl hover:bg-yellow-300 transition-all shadow-md text-white no-underline">
+              <a href={`tel:${phoneNumber}`} className="mt-5 w-full flex items-center justify-center gap-2 bg-yellow-400 text-blue-900 font-black py-3 rounded-xl hover:bg-yellow-300 transition-colors shadow-md text-white no-underline">
                 <Phone size={18} />
                 לחיוג חירום מיידי
               </a>
@@ -130,7 +130,7 @@ const App = () => {
             <div className="bg-blue-100 p-2 md:p-3 rounded-2xl text-blue-600 shadow-inner">
               <FileText size={24} className="md:w-7 md:h-7" />
             </div>
-            <h2 className="text-xl font-black text-blue-900 tracking-tight">תקנון ותנאי שימוש</h2>
+            <h2 className="text-xl md:text-2xl font-black text-blue-900 tracking-tight">תקנון ותנאי שימוש</h2>
           </div>
           <div className="overflow-y-auto text-gray-700 space-y-4 text-sm md:text-base leading-relaxed pr-2">
             <p>1. כל העבודות מבוצעות ע"י חשמלאי מוסמך בעל רישיון בתוקף.</p>
@@ -357,10 +357,10 @@ const App = () => {
             {i:Users, t:'+50,000 המלצות'}, 
             {i:ShieldCheck, t:'אחריות מלאה'}
           ].map((x,idx)=>{
-            const IconEl = x.i;
+            const BadgeIcon = x.i;
             return (
             <div key={idx} className="flex flex-col items-center">
-              <div className="w-12 h-12 md:w-16 md:h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-3 md:mb-4"><IconEl size={24} className="md:w-8 md:h-8" /></div>
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-3 md:mb-4"><BadgeIcon size={24} className="md:w-8 md:h-8" /></div>
               <span className="font-bold text-base md:text-xl text-gray-900">{x.t}</span>
             </div>
           );})}
