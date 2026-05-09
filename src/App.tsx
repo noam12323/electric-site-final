@@ -106,7 +106,7 @@ const App = () => {
                 <AlertTriangle className="text-yellow-600 mt-1 shrink-0" size={20} />
                 <p className="text-blue-900 leading-relaxed font-medium text-sm">{aiResponse}</p>
               </div>
-              <a href={`tel:${phoneNumber}`} className="mt-5 w-full flex items-center justify-center gap-2 bg-yellow-400 text-blue-900 font-black py-3 rounded-xl hover:bg-yellow-300 transition-colors shadow-md no-underline text-white">
+              <a href={`tel:${phoneNumber}`} className="mt-5 w-full flex items-center justify-center gap-2 bg-yellow-400 text-blue-900 font-black py-3 rounded-xl hover:bg-yellow-300 transition-colors shadow-md text-white no-underline">
                 <Phone size={18} />
                 לחיוג חירום מיידי
               </a>
@@ -232,13 +232,30 @@ const App = () => {
               {i:Users, t:'+50,000 המלצות', c:'green'}, 
               {i:Percent, t:'מחירים הוגנים', c:'yellow'}
             ].map((x,idx)=>{
-              const Icon = x.i;
+              const IconComp = x.i;
               return (
               <div key={idx} className="flex flex-col items-center p-4 md:p-6 bg-gray-50 rounded-2xl md:rounded-3xl border border-gray-100">
-                <div className="bg-gray-100 text-blue-600 p-2 md:p-3 rounded-xl mb-3"><Icon size={24} className="md:w-7 md:h-7" /></div>
+                <div className={`bg-gray-100 text-blue-600 p-2 md:p-3 rounded-xl mb-3`}><IconComp size={24} className="md:w-7 md:h-7" /></div>
                 <h3 className="font-bold text-gray-900 mb-1 text-sm md:text-base">{x.t}</h3>
               </div>
             );})}
+          </div>
+        </section>
+
+        <section className="py-12 md:py-20 bg-gray-50 px-4">
+          <div className="max-w-6xl mx-auto text-center">
+            <h2 className="text-2xl md:text-3xl font-black text-blue-900 mb-10 tracking-tight">שירותי חשמל נפוצים ב{selectedCity}</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-8 text-right">
+              {services.map((srv, idx) => (
+                <div key={idx} className="bg-white p-6 md:p-8 rounded-2xl md:rounded-3xl shadow-sm hover:shadow-xl transition-all border border-gray-100 group">
+                  <div className="w-12 h-12 md:w-16 md:h-16 bg-blue-50 text-blue-600 rounded-xl md:rounded-2xl flex items-center justify-center mb-4 md:mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                    <srv.icon size={24} className="md:w-7 md:h-7" />
+                  </div>
+                  <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2 md:mb-3">{srv.title}</h3>
+                  <p className="text-sm md:text-base text-gray-600 leading-relaxed">{srv.desc}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -246,7 +263,7 @@ const App = () => {
           <div className="max-w-4xl mx-auto">
             <Zap className="text-yellow-400 mx-auto mb-4 md:mb-6 w-10 h-10 md:w-12 md:h-12" />
             <p className="mb-4 md:mb-6 text-lg md:text-xl text-white font-medium">הייעוץ הראשוני טלפוני הינו בחינם. זמינים עבורכם תמיד.</p>
-            <a href={`tel:${phoneNumber}`} className="inline-flex text-yellow-400 hover:text-yellow-300 font-black text-2xl md:text-3xl transition-colors mb-4 no-underline text-yellow-400" dir="ltr">{phoneNumber}</a>
+            <a href={`tel:${phoneNumber}`} className="inline-flex text-yellow-400 hover:text-yellow-300 font-black text-2xl md:text-3xl transition-colors mb-4 no-underline" dir="ltr">{phoneNumber}</a>
             <div className="mt-6 md:mt-8 flex flex-col md:flex-row justify-center items-center gap-4 text-xs md:text-sm opacity-60">
               <span>© {new Date().getFullYear()} חשמלאי 24/7. כל הזכויות שמורות.</span>
               <button onClick={() => setIsTermsOpen(true)} className="hover:text-white hover:underline transition-colors underline">תקנון ותנאי שימוש</button>
@@ -276,7 +293,7 @@ const App = () => {
             <Zap className="text-yellow-400 w-6 h-6 md:w-8 md:h-8" fill="currentColor" />
             <span className="font-black text-xl md:text-2xl tracking-tight">חשמלאי <span className="text-yellow-400">24/7</span></span>
           </div>
-          <button className="md:hidden p-1" onClick={() => setIsMenuOpen(!isMenuOpen)}>{isMenuOpen ? <X size={26} /> : <Menu size={26} />}</button>
+          <button className="md:hidden p-1" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">{isMenuOpen ? <X size={26} /> : <Menu size={26} />}</button>
           <div className="hidden md:flex items-center gap-8 font-medium">
             <a href="#areas" className="text-blue-100 hover:text-white transition-colors no-underline">אזורי שירות</a>
             <a href="#services" className="text-blue-100 hover:text-white transition-colors no-underline">שירותים</a>
@@ -286,7 +303,7 @@ const App = () => {
           </div>
         </div>
         {isMenuOpen && (
-          <div className="md:hidden bg-blue-800 border-t border-blue-700 absolute w-full shadow-xl">
+          <div className="md:hidden bg-blue-800 border-t border-blue-700 absolute w-full shadow-xl z-50">
             <div className="flex flex-col px-4 py-2">
               <a href="#areas" onClick={() => setIsMenuOpen(false)} className="text-base font-medium text-white py-3 border-b border-blue-700/50 no-underline">אזורי שירות</a>
               <a href="#services" onClick={() => setIsMenuOpen(false)} className="text-base font-medium text-white py-3 no-underline">שירותים</a>
@@ -338,13 +355,30 @@ const App = () => {
             {i:Users, t:'+50,000 המלצות'}, 
             {i:ShieldCheck, t:'אחריות מלאה'}
           ].map((x,idx)=>{
-            const Icon = x.i;
+            const IconEl = x.i;
             return (
             <div key={idx} className="flex flex-col items-center">
-              <div className="w-12 h-12 md:w-16 md:h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-3 md:mb-4"><Icon size={24} className="md:w-8 md:h-8" /></div>
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-3 md:mb-4"><IconEl size={24} className="md:w-8 md:h-8" /></div>
               <span className="font-bold text-base md:text-xl text-gray-900">{x.t}</span>
             </div>
           );})}
+        </div>
+      </section>
+
+      <section id="services" className="py-12 md:py-20 bg-white px-4">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-2xl md:text-3xl font-black text-blue-900 mb-10 tracking-tight">שירותי חשמל נפוצים</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-8 text-right">
+            {services.map((srv, idx) => (
+              <div key={idx} className="bg-gray-50 p-6 md:p-8 rounded-2xl md:rounded-3xl shadow-sm hover:shadow-xl transition-all border border-gray-100 group">
+                <div className="w-12 h-12 md:w-16 md:h-16 bg-white text-blue-600 rounded-xl md:rounded-2xl flex items-center justify-center mb-4 md:mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                  <srv.icon size={24} className="md:w-7 md:h-7" />
+                </div>
+                <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2 md:mb-3">{srv.title}</h3>
+                <p className="text-sm md:text-base text-gray-600 leading-relaxed">{srv.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
